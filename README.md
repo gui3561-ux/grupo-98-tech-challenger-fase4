@@ -1,6 +1,16 @@
 # Previsão de fechamento PETR4.SA (LSTM D+1)
 
-Tech Challenge da Fase 4 da pós em Machine Learning ([FIAP](https://github.com/gui3561-ux/grupo-98-tech-challenger-fase4)). **Grupo 98.**
+Tech Challenge da Fase 4 da pós em Machine Learning (FIAP). **Grupo 98.**
+
+Repositório: https://github.com/gui3561-ux/grupo-98-tech-challenger-fase4
+
+| RM | Integrante |
+|---|---|
+| RM371323 | Guilherme Ramos Couceiro |
+| RM372947 | Lucas Ribeiro Pestana |
+| RM373551 | Sávio Aparecido Crispim |
+| RM373555 | Wesley Oliveira |
+| RM373529 | Cristiano Santos de Oliveira |
 
 O projeto treina um LSTM univariado no fechamento de **PETR4.SA** e serve a previsão do **próximo pregão (D+1)** por uma API REST. O enunciado usa `DIS` só como exemplo de `yfinance`; a ação é de livre escolha. O usuário envia 60 fechamentos históricos. A API **não** consulta a bolsa na inferência.
 
@@ -10,8 +20,8 @@ O projeto treina um LSTM univariado no fechamento de **PETR4.SA** e serve a prev
 |---|---|
 | Código + documentação | este README, código em `src/`, notebooks em `notebooks/` |
 | Docker da API | `Dockerfile` + `compose.yaml` |
-| Vídeo da API | gravar em `http://127.0.0.1:8000/docs` (Swagger: POST `/predict`) |
-| Link da API em nuvem | **ainda não há URL pública**; a demo oficial é local (`docker compose up --build`) |
+| Vídeo da API | será gravado **depois por um integrante**, em `http://127.0.0.1:8000/docs` (Swagger: POST `/predict`) |
+| Link da API em nuvem | **Render** (alvo). A URL pública ainda será colada aqui após o primeiro deploy; até lá a demo oficial é `docker compose up --build` |
 
 ## O que vem no clone
 
@@ -66,6 +76,8 @@ Resposta do modelo persistido neste repositório:
 }
 ```
 
+O último close dessa janela está perto de **R$ 48**. O LSTM devolve ~**41** porque suaviza a série em vez de copiar o valor de hoje — o mesmo efeito que faz a naive ganhar nas métricas abaixo. Não é bug da API.
+
 A lista `prices` deve ter **exatamente 60** números finitos. Qualquer outro tamanho, `null` ou `Infinity` retorna **422**.
 
 Em seguida, métricas de produção (contagem de previsões, latência, CPU e memória RSS):
@@ -108,8 +120,10 @@ O script:
 2. limpa a série, faz split cronológico 70/15/15 **sem shuffle**
 3. ajusta `MinMaxScaler` só no treino
 4. monta janelas de 60 pregões → alvo D+1
-5. treina o LSTM (duas camadas + Dropout + Dense(1)) com early stopping
+5. treina o LSTM (64 e 32 unidades, dropout 0.2, batch 32, até 40 épocas, early stopping em `val_loss` com patience 5)
 6. grava `models/lstm_petr4.keras`, `models/scaler.pkl` e `models/metrics.json`
+
+O recorte acima é o artefato em `models/`. Alternativas consideradas (rede 32/16; dropout 0.4) e o critério de escolha estão no notebook `02`. O treino oficial **não** é o notebook.
 
 ### Métricas (teste, em R$)
 
@@ -120,7 +134,7 @@ Valores gerados pelo último treino (`models/metrics.json`), no conjunto de test
 | LSTM | 2.28 | 3.00 | 5.68% |
 | Naive (amanhã = hoje) | 0.48 | 0.64 | 1.26% |
 
-A baseline naive ganhou. Isso é esperado em preço absoluto: o fechamento de D+1 está muito próximo do de D, e o LSTM acaba suavizando em vez de copiar o último valor. O trabalho documenta essa comparação em vez de escondê-la.
+A baseline naive ganhou. Em preço absoluto isso é esperado: o fechamento de D+1 quase sempre está colado no de D, e o LSTM suaviza (daí ~41 vs ~48 no exemplo do `/predict`). O trabalho documenta a comparação em vez de escondê-la. **Não retreine só para “ganhar” da naive** — isso não muda o fato de o alvo ser o Close em reais.
 
 ## Notebooks (entrega acadêmica)
 
@@ -129,7 +143,7 @@ Pasta `notebooks/`. São o material de **exploração e gráficos** para o víde
 | Arquivo | Papel |
 |---|---|
 | `notebooks/01_exploracao_petr4.ipynb` | Série PETR4.SA, limpeza e split cronológico 70/15/15 |
-| `notebooks/02_treino_e_avaliacao.ipynb` | LSTM D+1, MAE/RMSE/MAPE vs naive, gráfico real vs previsto |
+| `notebooks/02_treino_e_avaliacao.ipynb` | LSTM D+1, hiperparâmetros, MAE/RMSE/MAPE vs naive, gráfico real vs previsto |
 
 Como abrir (na raiz do repositório, com o venv ativo):
 
@@ -141,24 +155,27 @@ jupyter notebook notebooks/01_exploracao_petr4.ipynb
 
 O `Dockerfile` instala só `pip install .` — Jupyter e matplotlib **não** vão para o container da API.
 
-## Deploy (Render ou Railway)
+## Deploy (Render)
 
-A mesma imagem do `Dockerfile` pode ir para a nuvem. **Ainda não há URL pública neste repositório.**
+Alvo de nuvem da entrega: **Render**, com a mesma imagem do `Dockerfile`. A URL pública **ainda não está neste README** — um integrante publica o serviço e cola o link aqui (por exemplo em `/docs`).
 
-### Render
+Arquivo `render.yaml` na raiz: Web Service Docker e health check em `/health`. A imagem escuta `PORT` (Render define; local sem `PORT` continua 8000).
 
-1. New → Web Service → conectar este repositório
-2. Runtime: Docker
-3. A porta 8000 já está no `EXPOSE` / CMD do Dockerfile
-4. Após o deploy, use `https://<serviço>.onrender.com/docs`
+Passos no painel (ou Blueprint com o `render.yaml`):
 
-### Railway
+1. New → Web Service → conectar este repositório GitHub
+2. Runtime: **Docker** (o Render usa o `Dockerfile`)
+3. Health check: `/health`
+4. Não é preciso retreinar: o modelo já vai na imagem
+5. Depois do primeiro deploy verde, copiar a URL do serviço e **substituir esta frase do README** pela URL real
+
+Se a instância gratuita dormir no dia da demo, grave o vídeo em `http://127.0.0.1:8000/docs` com `docker compose up`.
+
+### Railway (alternativa)
 
 1. New Project → Deploy from GitHub
 2. Railway detecta o Dockerfile
-3. Expor a porta 8000 (variável `PORT` se o painel exigir: ajuste o CMD ou defina o start command `uvicorn src.api.main:app --host 0.0.0.0 --port $PORT`)
-
-Se a cota gratuita estiver fria no dia da demo, grave o vídeo em `http://127.0.0.1:8000/docs` com `docker compose up`.
+3. A variável `PORT` já é lida pelo `CMD` da imagem
 
 ## Testes
 
@@ -176,6 +193,7 @@ tests/          pytest da coleta, do LSTM e da API
 notebooks/      exploração e avaliação para a banca (não vai no Docker)
 models/         lstm_petr4.keras, scaler.pkl, metrics.json (versionados)
 examples/       predict_payload.json (60 fechamentos para o curl)
-Dockerfile      imagem da API
+Dockerfile      imagem da API (PORT ou 8000)
 compose.yaml    docker compose na porta 8000
+render.yaml     Blueprint Render (Docker + /health)
 ```
