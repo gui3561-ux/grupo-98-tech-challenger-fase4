@@ -1,0 +1,43 @@
+---
+description: Padrões de frontend, UI e UX
+globs:
+  - "frontend/**"
+  - "src/components/**"
+  - "src/pages/**"
+  - "src/app/**"
+  - "**/*.tsx"
+  - "**/*.jsx"
+alwaysApply: false
+---
+
+# FRONTEND
+
+## Componentes
+Priorize responsabilidade clara, reutilização quando apropriada, baixo acoplamento e composição.
+Não crie componentes genéricos excessivamente abstratos.
+
+## Estado
+Mantenha estado no nível apropriado.
+Evite estado global quando estado local ou de página for suficiente.
+
+## UI
+Respeite o Design System existente.
+Antes de criar componentes:
+1. procure componentes existentes;
+2. procure variantes existentes;
+3. verifique padrões utilizados no projeto.
+
+## shadcn/ui
+Quando presente:
+- reutilize componentes existentes;
+- utilize variantes existentes;
+- preserve padrões do projeto;
+- evite recriar componentes equivalentes.
+
+Não introduza outra biblioteca de UI sem justificativa.
+
+## Acessibilidade
+Considere navegação por teclado, semântica HTML, labels, foco, contraste e estados de erro/loading.
+
+## UX
+Considere loading, empty state, error state, success state, feedback de ações e responsividade.

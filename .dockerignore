@@ -1,0 +1,11 @@
+.venv
+.git
+.cursor
+.pytest_cache
+**/__pycache__
+**/*.pyc
+tests
+data
+openspec
+*.egg-info
+.DS_Store

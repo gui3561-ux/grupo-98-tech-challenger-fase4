@@ -1,0 +1,36 @@
+---
+description: Padrões para desenvolvimento backend
+globs:
+  - "backend/**"
+  - "server/**"
+  - "api/**"
+  - "src/controllers/**"
+  - "src/services/**"
+  - "src/use-cases/**"
+alwaysApply: false
+---
+
+# BACKEND
+
+Antes de implementar, identifique:
+1. padrão arquitetural;
+2. tratamento de erros;
+3. validação de inputs;
+4. acesso a dados;
+5. autenticação/autorização.
+
+## Controllers
+Controllers devem permanecer focados em receber entrada, validar, chamar a aplicação e retornar resposta.
+Não concentre regras complexas de negócio no controller.
+
+## Regras de negócio
+Mantenha regras no local definido pela arquitetura existente.
+Não duplique regras entre controllers, services, repositories e jobs.
+
+## Integrações externas
+Considere timeout, retry, backoff, idempotência e circuit breaker quando tecnicamente apropriado.
+Não adicione mecanismos de resiliência sem necessidade.
+
+## Banco
+Evite N+1, queries desnecessárias, ausência de paginação em grandes coleções e transações excessivamente longas.
+Ao alterar schema, utilize o mecanismo de migration existente e considere dados existentes e compatibilidade.

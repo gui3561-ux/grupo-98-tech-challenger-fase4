@@ -1,0 +1,27 @@
+---
+description: Regras para banco de dados, migrations e persistência
+globs:
+  - "**/migrations/**"
+  - "**/schema.prisma"
+  - "**/*.sql"
+  - "**/repositories/**"
+  - "**/models/**"
+alwaysApply: false
+---
+
+# DATABASE
+
+Antes de alterar persistência, investigue schema atual, migrations, relacionamentos, constraints, índices, queries, transações e dependências.
+
+## Migrations
+Utilize o mecanismo de migration existente.
+Nunca altere produção manualmente quando o projeto possui mecanismo de migration.
+Considere dados existentes, compatibilidade, rollback quando aplicável e deploy progressivo.
+
+## Performance
+Investigue N+1, índices, paginação, joins, volume de dados e queries repetidas.
+Não otimize sem evidência.
+
+## Integridade
+Preserve foreign keys, constraints, unicidade e consistência transacional.
+Mudanças de schema devem considerar impacto nas aplicações consumidoras.

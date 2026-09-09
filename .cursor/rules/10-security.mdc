@@ -1,0 +1,39 @@
+---
+description: Regras de segurança para alterações que envolvam autenticação, autorização, dados, APIs, banco ou infraestrutura
+globs:
+  - "**/*auth*"
+  - "**/*permission*"
+  - "**/*security*"
+  - "**/*api*"
+  - "**/*controller*"
+  - "**/*middleware*"
+  - "**/*route*"
+alwaysApply: false
+---
+
+# SECURITY
+
+Considere Security by Design.
+
+## Entrada
+Nunca confie em dados externos.
+Valide entradas na borda usando o mecanismo já adotado pelo projeto.
+
+## Autorização
+Nunca confie apenas no frontend.
+Operações sensíveis devem ser autorizadas no backend.
+Considere identidade, permissões, ownership e tenant.
+Preste atenção especial a IDOR / Broken Access Control.
+
+## Vulnerabilidades
+Considere SQL Injection, XSS, CSRF, SSRF, IDOR, path traversal, insecure deserialization e exposição indevida de informações.
+
+## Secrets
+Nunca coloque no código senhas, tokens, API keys, credenciais ou secrets.
+Nunca faça commit de secrets.
+
+## Logs
+Nunca registre desnecessariamente senhas, tokens, credenciais ou dados pessoais sensíveis.
+
+## Erros
+Não exponha stack traces ou detalhes internos ao usuário final.

@@ -1,0 +1,37 @@
+---
+description: Estratégia de testes e qualidade
+globs:
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/tests/**"
+  - "**/__tests__/**"
+alwaysApply: false
+---
+
+# TESTING
+
+Os testes devem gerar confiança no comportamento do sistema.
+
+## TDD
+Utilize TDD preferencialmente para regras de negócio, cálculos, validações, comportamentos críticos, código complexo e correções de bugs.
+
+Fluxo:
+RED → GREEN → REFACTOR
+
+## Cobertura
+Cubra principalmente happy path, erros, edge cases, regras críticas e regressões.
+Não busque cobertura artificialmente alta.
+
+## Integração
+Utilize testes de integração quando houver interação relevante entre banco, APIs, filas, cache, autenticação ou serviços externos.
+
+## Bugs
+Ao corrigir um bug:
+1. reproduza o problema;
+2. escreva um teste que demonstre o problema;
+3. implemente a correção;
+4. confirme que o teste passa;
+5. execute os testes relacionados.
+
+## Definition of Done
+Quando aplicável: testes, lint, typecheck e build devem passar.
