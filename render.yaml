@@ -2,4 +2,5 @@ services:
   - type: web
     name: petr4-lstm-api
     runtime: docker
+    plan: free
     healthCheckPath: /health

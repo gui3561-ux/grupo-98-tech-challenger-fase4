@@ -68,11 +68,11 @@ O README SHALL incluir um exemplo de chamada à API de previsão que um leitor c
 - **THEN** o comando usa JSON válido com exatamente 60 fechamentos e a resposta de exemplo contém ticker PETR4.SA, horizonte D+1 e um fechamento previsto numérico alinhado ao artefato atual
 
 ### Requirement: Entregáveis da fase visíveis
-O README SHALL declarar o estado dos entregáveis do enunciado: documentação, contêiner, vídeo e API em nuvem. O README SHALL deixar explícito que o vídeo será gravado posteriormente por um integrante e MUST NOT inventar uma URL pública.
+O README SHALL declarar o estado dos entregáveis do enunciado: documentação, contêiner, vídeo e API em nuvem. O README SHALL incluir a URL pública verificada da API no Render (`https://grupo-98-tech-challenger-fase4.onrender.com`). O README SHALL deixar explícito que o vídeo será gravado posteriormente por um integrante e MUST NOT inventar outro hostname.
 
 #### Scenario: Nuvem e vídeo sem ambiguidade
 - **WHEN** um avaliador procura o link da API em produção e o vídeo
-- **THEN** o README indica Render como alvo de nuvem, mostra a URL pública se já houver deploy ou declara que a URL ainda será colada após o deploy, e deixa explícito que o vídeo será gravado posteriormente por um integrante usando `/docs`
+- **THEN** o README aponta para `https://grupo-98-tech-challenger-fase4.onrender.com` (incluindo `/docs` para o Swagger) e deixa explícito que o vídeo será gravado posteriormente por um integrante
 
 ### Requirement: Monitoramento demonstrável no README
 O README SHALL mostrar como observar latência e uso de recursos após uma previsão, usando o endpoint de métricas já existente.

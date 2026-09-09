@@ -20,8 +20,8 @@ O projeto treina um LSTM univariado no fechamento de **PETR4.SA** e serve a prev
 |---|---|
 | Código + documentação | este README, código em `src/`, notebooks em `notebooks/` |
 | Docker da API | `Dockerfile` + `compose.yaml` |
-| Vídeo da API | será gravado **depois por um integrante**, em `http://127.0.0.1:8000/docs` (Swagger: POST `/predict`) |
-| Link da API em nuvem | **Render** (alvo). A URL pública ainda será colada aqui após o primeiro deploy; até lá a demo oficial é `docker compose up --build` |
+| Vídeo da API | será gravado **depois por um integrante**, no Swagger (`POST /predict` em `/docs`) — nuvem ou `http://127.0.0.1:8000/docs` |
+| Link da API em nuvem | **Render Hobby**: https://grupo-98-tech-challenger-fase4.onrender.com (`/docs`, `/health`) |
 
 ## O que vem no clone
 
@@ -157,19 +157,31 @@ O `Dockerfile` instala só `pip install .` — Jupyter e matplotlib **não** vã
 
 ## Deploy (Render)
 
-Alvo de nuvem da entrega: **Render**, com a mesma imagem do `Dockerfile`. A URL pública **ainda não está neste README** — um integrante publica o serviço e cola o link aqui (por exemplo em `/docs`).
+Alvo de nuvem da entrega: **Render Hobby**, com a mesma imagem do `Dockerfile`.
 
-Arquivo `render.yaml` na raiz: Web Service Docker e health check em `/health`. A imagem escuta `PORT` (Render define; local sem `PORT` continua 8000).
+| Recurso | URL |
+|---|---|
+| API | https://grupo-98-tech-challenger-fase4.onrender.com |
+| Swagger | https://grupo-98-tech-challenger-fase4.onrender.com/docs |
+| Health | https://grupo-98-tech-challenger-fase4.onrender.com/health |
 
-Passos no painel (ou Blueprint com o `render.yaml`):
+Arquivo `render.yaml` na raiz: Web Service Docker e health check em `/health`. A imagem escuta `PORT` (Render define; local sem `PORT` continua 8000). O compute permanece no Hobby (`free` ou Starter 512 MB). **Não** subir para Standard/Pro.
+
+O Hobby pode **dormir** depois de ocioso. Antes da demo, chame `GET /health` e espere o 200 (o primeiro hit pode demorar um minuto). Se a instância estiver suspensa, use o fallback local:
+
+```bash
+docker compose up --build
+```
+
+Swagger local: http://127.0.0.1:8000/docs
+
+Passos no painel (ou Blueprint com o `render.yaml`), se for preciso recriar o serviço:
 
 1. New → Web Service → conectar este repositório GitHub
 2. Runtime: **Docker** (o Render usa o `Dockerfile`)
 3. Health check: `/health`
-4. Não é preciso retreinar: o modelo já vai na imagem
-5. Depois do primeiro deploy verde, copiar a URL do serviço e **substituir esta frase do README** pela URL real
-
-Se a instância gratuita dormir no dia da demo, grave o vídeo em `http://127.0.0.1:8000/docs` com `docker compose up`.
+4. Compute: Hobby (`free` ou `starter`); não escolher Standard/Pro
+5. Não é preciso retreinar: o modelo já vai na imagem
 
 ### Railway (alternativa)
 
