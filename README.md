@@ -12,6 +12,69 @@ Repositório: https://github.com/gui3561-ux/grupo-98-tech-challenger-fase4
 | RM373555 | Wesley Oliveira |
 | RM373529 | Cristiano Santos de Oliveira |
 
+## Fase 4 — Setup local (Credit Scoring MLOps)
+
+> Esta fase muda de tema: sai a previsão LSTM (PETR4) e entra a camada de
+> **Sustentação e Confiabilidade** de um modelo de **Credit Scoring** — contratos
+> de qualidade de dados, detecção de drift, observabilidade e governança (LGPD).
+> Veja o plano completo em [`TASKS.md`](TASKS.md) e o dataset em [`data/README.md`](data/README.md).
+
+### Requisitos
+- Python **3.11+**
+- [`uv`](https://docs.astral.sh/uv/) (gerenciador de dependências e ambiente)
+
+### Instalação
+
+O install **padrão** já traz tudo que a Fase 4 precisa (scikit-learn, XGBoost,
+Pandera, Evidently, SciPy, ucimlrepo) e **não** instala TensorFlow:
+
+```bash
+uv sync
+```
+
+> **Por que TensorFlow ficou de fora?** Ele é dependência **exclusiva da Fase 3**
+> (LSTM) e não tem wheel para todas as plataformas/versões de Python (ex.: Python
+> 3.14 no macOS ARM), o que travava o `uv sync` com o erro:
+> `Distribution tensorflow==... can't be installed because it doesn't have a source distribution or wheel for the current platform`.
+> Por isso as libs pesadas da Fase 3 vivem no extra opcional `legacy`.
+
+Extras opcionais (instale só se precisar):
+
+```bash
+uv sync --extra legacy      # Fase 3: yfinance + tensorflow (API/LSTM antiga)
+uv sync --extra notebooks   # jupyter + matplotlib
+```
+
+### Preparar o dataset base
+
+O CSV do Kaggle (`data/raw/german_credit_data.csv`) vem **sem a coluna de target**
+(`Risk`). O script abaixo recupera o rótulo original do UCI (mesma ordem de linhas)
+e o anexa, gerando `data/raw/german_credit_with_risk.csv`:
+
+```bash
+uv run python -m src.credit.data.make_dataset
+```
+
+Requer acesso à internet (UCI id=144 via `ucimlrepo`, com fallback para download
+direto). O arquivo gerado fica fora do Git (`.gitignore`) — regenerável a qualquer
+momento com o comando acima.
+
+### Estrutura da Fase 4
+
+```
+src/credit/            código da Fase 4 (data/ e model/)
+  data/make_dataset.py prepara o dataset base (anexa o target Risk)
+data/
+  raw/                 CSV original + dataset com target (gerado)
+  reference/           dataset de treino/baseline (Etapa 1)
+  production/          dataset com drift injetado (Etapa 2)
+  README.md            origem, dicionário de dados e estratégia de split
+reports/               relatórios HTML de drift/observabilidade (Etapas 2-3)
+```
+
+---
+
+
 O projeto treina um LSTM univariado no fechamento de **PETR4.SA** e serve a previsão do **próximo pregão (D+1)** por uma API REST. O enunciado usa `DIS` só como exemplo de `yfinance`; a ação é de livre escolha. O usuário envia 60 fechamentos históricos. A API **não** consulta a bolsa na inferência.
 
 ## Entregáveis da fase
