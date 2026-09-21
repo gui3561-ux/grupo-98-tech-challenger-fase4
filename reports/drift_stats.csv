@@ -1,0 +1,10 @@
+feature,type,psi,psi_verdict,ks_statistic,ks_pvalue,ks_drift
+Age,numeric,1.1062,significativo,0.4129,0.0,True
+Credit amount,numeric,0.415,significativo,0.2595,0.0,True
+Checking account,categorical,0.11,moderado,,,
+Duration,numeric,0.039,estável,0.0324,0.975546,False
+Saving accounts,categorical,0.0324,estável,,,
+Purpose,categorical,0.0253,estável,,,
+Job,categorical,0.0074,estável,,,
+Housing,categorical,0.0027,estável,,,
+Sex,categorical,0.0009,estável,,,
