@@ -42,6 +42,16 @@ data = [
     "ucimlrepo>=0.0.7",      # recuperar target original do German Credit (UCI id=144)
 ]
 
+#[tool.uv]
+# Somente macOS (dev) e Linux (Docker/Render) são suportados; Windows não.
+#environments = ["sys_platform == 'darwin'", "sys_platform == 'linux'"]
+
+# Índice público fixo para o uv.lock ser portável (time, Docker e Render),
+# independente de mirrors configurados na máquina de quem roda `uv lock`.
+#[[tool.uv.index]]
+#url = "https://pypi.org/simple"
+#default = true
+
 [tool.setuptools.packages.find]
 include = ["src*"]
 

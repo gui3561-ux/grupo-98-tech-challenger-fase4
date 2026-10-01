@@ -40,7 +40,7 @@ def simulate_production_drift(random_state: int = C.RANDOM_STATE) -> pd.DataFram
     """Lê production_raw.csv, injeta drift e grava data/production/production.csv."""
     if not C.PRODUCTION_RAW_CSV.exists():
         raise FileNotFoundError(
-            f"{C.PRODUCTION_RAW_CSV} não encontrado. Rode: python -m src.credit.data.preprocess"
+            f"{C.PRODUCTION_RAW_CSV} não encontrado. Rode: uv run python -m src.credit.data.preprocess"
         )
     rng = np.random.default_rng(random_state)
     df = pd.read_csv(C.PRODUCTION_RAW_CSV)

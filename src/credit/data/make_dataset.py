@@ -11,7 +11,7 @@ Fonte do target:
     - Fallback: download direto de ``german.data`` do repositório UCI.
 
 Uso (na máquina com acesso à internet):
-    python -m src.credit.data.make_dataset
+    uv run python -m src.credit.data.make_dataset
 
 Requer acesso à rede na primeira execução. O arquivo gerado fica versionado
 localmente e não precisa ser baixado novamente.

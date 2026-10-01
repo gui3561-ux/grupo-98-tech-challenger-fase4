@@ -47,7 +47,7 @@ def _performance(df: pd.DataFrame) -> dict:
 def build_drift_report() -> dict:
     if not C.PRODUCTION_CSV.exists():
         raise FileNotFoundError(
-            f"{C.PRODUCTION_CSV} não encontrado. Rode: python -m src.credit.data.simulate_drift"
+            f"{C.PRODUCTION_CSV} não encontrado. Rode: uv run python -m src.credit.data.simulate_drift"
         )
     model = load_model()
     reference = predict_frame(model, pd.read_csv(C.REFERENCE_CSV))

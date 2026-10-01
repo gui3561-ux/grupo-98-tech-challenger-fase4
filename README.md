@@ -94,17 +94,18 @@ O projeto treina um LSTM univariado no fechamento de **PETR4.SA** e serve a prev
 | `examples/predict_payload.json` | sim | `curl` de `/predict` copiável |
 | `data/raw.parquet` | **não** (`.gitignore`) | cache local do yfinance |
 
-Depois do clone, `docker compose` ou `uvicorn` já servem o modelo versionado. `python -m src.model.train` e os notebooks baixam PETR4.SA via yfinance se o cache não existir.
+Depois do clone, `docker compose` ou `uv run uvicorn` já servem o modelo versionado. `uv run python -m src.model.train` e os notebooks baixam PETR4.SA via yfinance se o cache não existir.
 
 ## Ambiente
 
-- Python 3.11+
+- Python 3.11+ e [`uv`](https://docs.astral.sh/uv/) (único gerenciador de dependências do projeto)
+- macOS ou Linux (Windows não é suportado)
 - Docker (para a demo e o deploy)
 
+A API e o treino da Fase 3 dependem do TensorFlow, que está no extra `legacy`:
+
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -e .
+uv sync --extra legacy
 ```
 
 ## Caminho rápido (Docker)
@@ -164,7 +165,7 @@ Outros endpoints:
 ### API local (sem Docker)
 
 ```bash
-uvicorn src.api.main:app --reload --port 8000
+uv run uvicorn src.api.main:app --reload --port 8000
 ```
 
 OpenAPI: http://127.0.0.1:8000/openapi.json
@@ -174,7 +175,7 @@ OpenAPI: http://127.0.0.1:8000/openapi.json
 Só é necessário para retreinar ou para os notebooks quando `models/metrics.json` ainda não existe. Sem `data/raw.parquet`, o script baixa a série.
 
 ```bash
-python -m src.model.train
+uv run python -m src.model.train
 ```
 
 O script:
@@ -208,15 +209,15 @@ Pasta `notebooks/`. São o material de **exploração e gráficos** para o víde
 | `notebooks/01_exploracao_petr4.ipynb` | Série PETR4.SA, limpeza e split cronológico 70/15/15 |
 | `notebooks/02_treino_e_avaliacao.ipynb` | LSTM D+1, hiperparâmetros, MAE/RMSE/MAPE vs naive, gráfico real vs previsto |
 
-Como abrir (na raiz do repositório, com o venv ativo):
+Como abrir (na raiz do repositório):
 
 ```bash
-pip install -e ".[notebooks]"
-python -m src.model.train   # se ainda não gerou models/metrics.json; baixa yfinance sem cache
-jupyter notebook notebooks/01_exploracao_petr4.ipynb
+uv sync --extra legacy --extra notebooks
+uv run python -m src.model.train   # se ainda não gerou models/metrics.json; baixa yfinance sem cache
+uv run jupyter notebook notebooks/01_exploracao_petr4.ipynb
 ```
 
-O `Dockerfile` instala só `pip install .` — Jupyter e matplotlib **não** vão para o container da API.
+O `Dockerfile` instala só `uv sync --frozen --no-dev --extra legacy` — Jupyter e matplotlib **não** vão para o container da API.
 
 ## Deploy (Render)
 
@@ -255,7 +256,7 @@ Passos no painel (ou Blueprint com o `render.yaml`), se for preciso recriar o se
 ## Testes
 
 ```bash
-pytest
+uv run pytest
 ```
 
 ## Estrutura

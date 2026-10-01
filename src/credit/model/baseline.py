@@ -58,7 +58,7 @@ def train_baseline() -> dict:
     """Treina no dataset de Referência, avalia em holdout e persiste modelo+métricas."""
     if not C.REFERENCE_CSV.exists():
         raise FileNotFoundError(
-            f"{C.REFERENCE_CSV} não encontrado. Rode: python -m src.credit.data.preprocess"
+            f"{C.REFERENCE_CSV} não encontrado. Rode: uv run python -m src.credit.data.preprocess"
         )
     ref = pd.read_csv(C.REFERENCE_CSV)
     X, y = ref[C.FEATURES], _to_binary(ref[C.TARGET])
@@ -102,7 +102,7 @@ def train_baseline() -> dict:
 def load_model() -> Pipeline:
     if not C.MODEL_PATH.exists():
         raise FileNotFoundError(
-            f"{C.MODEL_PATH} não encontrado. Rode: python -m src.credit.model.baseline"
+            f"{C.MODEL_PATH} não encontrado. Rode: uv run python -m src.credit.model.baseline"
         )
     return joblib.load(C.MODEL_PATH)
 

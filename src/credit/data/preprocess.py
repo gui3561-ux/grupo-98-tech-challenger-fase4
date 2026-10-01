@@ -17,7 +17,7 @@ def load_base_dataset() -> pd.DataFrame:
     """Lê o dataset com target e trata NaN de conta como categoria 'no_account'."""
     if not C.RAW_CSV.exists():
         raise FileNotFoundError(
-            f"{C.RAW_CSV} não encontrado. Rode: python -m src.credit.data.make_dataset"
+            f"{C.RAW_CSV} não encontrado. Rode: uv run python -m src.credit.data.make_dataset"
         )
     df = pd.read_csv(C.RAW_CSV)
     for col in ["Saving accounts", "Checking account"]:

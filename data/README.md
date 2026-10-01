@@ -20,7 +20,7 @@ coluna `Risk`**. O target original (1=good, 2=bad) é recuperado do UCI, que man
 **mesma ordem de linhas**, e anexado por índice pelo script:
 
 ```bash
-python -m src.credit.data.make_dataset
+uv run python -m src.credit.data.make_dataset
 ```
 
 Isso gera `raw/german_credit_with_risk.csv` (features + coluna `Risk`), que é o

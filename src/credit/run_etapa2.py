@@ -7,7 +7,7 @@ Executa, em ordem:
 4. Detecção de drift + relatórios (Evidently + PSI/KS).
 
 Uso:
-    python -m src.credit.run_etapa2
+    uv run python -m src.credit.run_etapa2
 """
 
 from __future__ import annotations
