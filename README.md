@@ -4,15 +4,14 @@
 Tech Challenge da Fase 4 da pós-graduação em Machine Learning (FIAP). **Grupo 98.**
 
 - **Repositório GitHub:** [https://github.com/gui3561-ux/grupo-98-tech-challenger-fase4](https://github.com/gui3561-ux/grupo-98-tech-challenger-fase4)
-- **Vídeo de Demonstração (Método STAR — ≤ 5 min):** [Link do YouTube](https://youtu.be/SEU_LINK_AQUI) *(substitua pelo link final da gravação do grupo)*
 
-| RM | Integrante | Responsabilidade Principal na Apresentação STAR |
+| RM | Integrante | Área de Atuação Principal |
 |---|---|---|
-| RM371323 | Guilherme Ramos Couceiro | Apresentação e Arquitetura de Sustentação |
+| RM371323 | Guilherme Ramos Couceiro | Arquitetura de Sustentação e Orquestração |
 | RM372947 | Lucas Ribeiro Pestana | Validação de Contratos de Dados (Pandera) |
 | RM373551 | Sávio Aparecido Crispim | Simulação e Detecção Estatística de Drift (Evidently) |
 | RM373555 | Wesley Oliveira | Observabilidade e Tracking de Experimentos (MLflow) |
-| RM373529 | Cristiano Santos de Oliveira | Governança (LGPD), Análise Causal e Conclusões |
+| RM373529 | Cristiano Santos de Oliveira | Governança (LGPD) e Análise Causal |
 
 ---
 
@@ -211,60 +210,7 @@ Diante da detecção tempestiva provida pela camada de observabilidade, a esteir
 
 ---
 
-## 6. Roteiro Oficial do Vídeo (Método STAR — 5 Minutos)
-
-Este roteiro foi elaborado para que os integrantes do **Grupo 98** gravem a apresentação do Tech Challenge de forma concisa, técnica e alinhada à matriz de avaliação da FIAP.
-
-- **Tempo Máximo Estrito:** 5 minutos.
-- **Divisão por Bloco STAR:**
-
-```mermaid
-timeline
-    title Estrutura da Apresentação (Método STAR)
-    00:00 - 01:00 : Situation (Contexto da Fintech, Risco de Crédito e Degradação Silenciosa)
-    01:00 - 02:00 : Task (Requisitos Técnicos: Contratos Pandera, Detecção de Drift e LGPD)
-    02:00 - 03:30 : Action (Demonstração Prática: Scripts, Barreira de Dados e MLflow)
-    03:30 - 05:00 : Result (Análise de Relatórios Evidently, Causalidade e Conclusões)
-```
-
-### Roteiro Detalhado de Gravação
-
-#### [00:00 - 01:00] Bloco 1: Situation (Situação)
-- **Apresentador Sugerido:** Guilherme Couceiro / Cristiano Santos
-- **Tela a Compartilhar:** Slide inicial com o título do projeto, identificação do Grupo 98 e a arquitetura geral de MLOps.
-- **Fala:**
-  > *"Olá, professores e avaliadores! Somos o Grupo 98 do Tech Challenge da Fase 4. Nosso desafio aborda um problema crítico do mundo real: a sustentação de modelos de Credit Scoring em produção. Em fintechs de crédito, alterações macroeconômicas silenciosas — como surtos inflacionários e entrada de novos perfis digitais — degradam a performance do modelo sem que o sistema gere qualquer erro de código. Uma instituição que opera cega a essas variações passa a conceder crédito a clientes com perfil de inadimplência ou a negar crédito a bons pagadores, gerando prejuízos milionários. Construímos a camada completa de sustentação e confiabilidade para interceptar essas anomalias."*
-
-#### [01:00 - 02:00] Bloco 2: Task (Tarefa / Requisitos Técnicos)
-- **Apresentador Sugerido:** Lucas Pestana
-- **Tela a Compartilhar:** Tabela de entregáveis das 4 Etapas no README do repositório.
-- **Fala:**
-  > *"Nossa missão técnica no Tech Challenge foi dividida em quatro pilares fundamentais: primeiro, construir uma barreira estrita de qualidade de dados com Pandera para assegurar que 'lixo não entre no modelo'; segundo, simular um ambiente realista de produção sob estresse macroeconômico e implementar testes estatísticos rigorosos de drift populacional via Evidently AI; terceiro, construir a infraestrutura de observabilidade e tracking de métricas operacionais com MLflow; e quarto, fundamentar juridicamente as operações sob as regras da LGPD e diagnosticar o nexo causal da perda de acurácia."*
-
-#### [02:00 - 03:30] Bloco 3: Action (Ação e Demonstração Prática)
-- **Apresentador Sugerido:** Sávio Crispim / Wesley Oliveira
-- **Tela a Compartilhar:** Terminal executando os scripts e visualizando o MLflow UI.
-- **Ação 1 (Barreira Pandera):**
-  - Executa: `uv run python -m src.credit.run_etapa1`
-  - Fala: *"Aqui demonstramos a Etapa 1. O script valida o contrato Pandera e em seguida simula a chegada de um lote corrupto com idades abaixo de 18 anos e categorias nulas. Observem que o Ingestion Gate intercepta imediatamente e aborta com DataContractViolationError, protegendo a esteira."*
-- **Ação 2 (Simulação de Drift e Orquestrador):**
-  - Executa: `uv run python -m src.credit.pipeline`
-  - Fala: *"Agora executamos o pipeline unificado de ponta a ponta. Ele valida os dados, treina o baseline, injeta o choque inflacionário na base de produção, calcula os testes estatísticos e registra tudo no MLflow dentro de uma única run rastreável."*
-- **Ação 3 (Observabilidade no MLflow):**
-  - Mostra a interface web do MLflow (`http://127.0.0.1:5000`):
-  - Fala: *"No MLflow, temos a visão completa da saúde da esteira: latência de cada etapa em milissegundos, total de registros, parâmetros do modelo e o número de alertas críticos de drift. Além disso, todos os artefatos estão salvos na run, incluindo o modelo binário e o relatório interativo de drift."*
-
-#### [03:30 - 05:00] Bloco 4: Result (Resultados, Causalidade e Governança)
-- **Apresentador Sugerido:** Cristiano Santos / Guilherme Couceiro
-- **Tela a Compartilhar:** O relatório `reports/drift_report.html` aberto no navegador e a seção de Governança do README.
-- **Fala:**
-  > *"Como resultado, no relatório do Evidently AI comprovamos que as features Age e Credit amount sofreram Data Drift severo, com PSI ultrapassando 1.10 e 0.45, muito acima da margem crítica de 0.25. Na análise causal, explicamos que a inflação expandiu o ticket médio de crédito e atraiu tomadores jovens, fazendo o ROC-AUC do modelo despencar de 0.7631 para 0.5623 — caracterizando o Concept Drift e a perda de poder preditivo.*
-  > 
-  > *Por fim, na dimensão de Governança e LGPD, formalizamos a concessão de crédito sob o Artigo 7º, inciso X (Proteção ao Crédito) e Legítimo Interesse (inciso IX), estabelecendo diretrizes de mitigação de viés discriminatório em gênero e idade, e garantindo ao titular o direito de revisão de decisões automatizadas pelo Artigo 20. Assim, entregamos uma solução pronta, robusta e aderente às melhores práticas de engenharia de IA e MLOps."*
-
----
-
-## 7. Estrutura de Diretórios da Fase 4
+## 6. Estrutura de Diretórios da Fase 4
 
 ```
 grupo-98-tech-challenger-fase4/
@@ -303,7 +249,7 @@ grupo-98-tech-challenger-fase4/
 
 ---
 
-## 8. Apêndice: Fase 3 (Legado — Previsão PETR4.SA LSTM)
+## 7. Apêndice: Fase 3 (Legado — Previsão PETR4.SA LSTM)
 
 > [!NOTE]
 > Esta seção preserva integralmente a documentação da **Fase 3** para fins de histórico e rastreabilidade acadêmica. O código da Fase 3 reside em `src/api/` e `src/model/` e pode ser executado com o extra opcional `legacy`.
