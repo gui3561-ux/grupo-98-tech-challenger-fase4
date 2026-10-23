@@ -1,27 +1,34 @@
 ---
-description: Regras para banco de dados, migrations e persistência
+description: Use quando for alterar schema, migration, SQL, índice, transação, repositório ou persistência (database, Prisma, SQL).
 globs:
   - "**/migrations/**"
+  - "**/*migration*"
   - "**/schema.prisma"
+  - "**/schema.sql"
   - "**/*.sql"
   - "**/repositories/**"
-  - "**/models/**"
+  - "**/prisma/**"
+  - "**/drizzle/**"
 alwaysApply: false
 ---
 
-# DATABASE
+# Banco
 
-Antes de alterar persistência, investigue schema atual, migrations, relacionamentos, constraints, índices, queries, transações e dependências.
+Antes de alterar persistência, leia o schema atual, a última migration e uma query do mesmo agregado. Confirme dialeto e ferramenta no repositório antes de escrever SQL.
 
 ## Migrations
-Utilize o mecanismo de migration existente.
-Nunca altere produção manualmente quando o projeto possui mecanismo de migration.
-Considere dados existentes, compatibilidade, rollback quando aplicável e deploy progressivo.
+Use a ferramenta de migration do projeto.
+Migration já aplicada permanece intacta. A mudança seguinte é uma migration nova.
+A migration deixa os dados existentes válidos: valor default, preenchimento e leitura compatível com o código que ainda está em produção.
+
+## Mudança destrutiva
+Remover ou restringir coluna, tabela ou constraint em etapas: criar o novo, preencher, trocar a leitura, remover o antigo numa migration posterior.
 
 ## Performance
-Investigue N+1, índices, paginação, joins, volume de dados e queries repetidas.
-Não otimize sem evidência.
+Índice novo acompanha filtro, join ou ordenação que a mudança introduz em tabela grande.
+Query nova evita N+1 e traz só as colunas usadas pelo caller.
+Otimização extra espera evidência de lentidão.
 
 ## Integridade
-Preserve foreign keys, constraints, unicidade e consistência transacional.
-Mudanças de schema devem considerar impacto nas aplicações consumidoras.
+Mantenha foreign key, unicidade e a transação que o código vizinho usa para essa escrita.
+Mudança de schema considera quem lê e escreve esse dado.

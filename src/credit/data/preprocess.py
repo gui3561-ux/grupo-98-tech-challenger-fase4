@@ -1,6 +1,7 @@
 """Carga e split Referência × Produção (base para a Etapa 1 e Etapa 2).
 
-- `load_base_dataset`: lê o CSV com target e normaliza os NaN de conta.
+- `load_base_dataset`: lê o CSV com target, normaliza os NaN de conta e valida
+  contra o contrato de dados Pandera.
 - `make_reference_production_split`: separa de forma estratificada o dataset de
   Referência (treino/baseline) do dataset de Produção-base (semente do drift).
 """
@@ -11,10 +12,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from src.credit import config as C
+from src.credit.data.contracts import validate_credit_data
 
 
-def load_base_dataset() -> pd.DataFrame:
-    """Lê o dataset com target e trata NaN de conta como categoria 'no_account'."""
+def load_base_dataset(validate: bool = True) -> pd.DataFrame:
+    """Lê o dataset com target, trata NaN de conta e aplica validação de contrato Pandera."""
     if not C.RAW_CSV.exists():
         raise FileNotFoundError(
             f"{C.RAW_CSV} não encontrado. Rode: uv run python -m src.credit.data.make_dataset"
@@ -22,6 +24,8 @@ def load_base_dataset() -> pd.DataFrame:
     df = pd.read_csv(C.RAW_CSV)
     for col in ["Saving accounts", "Checking account"]:
         df[col] = df[col].fillna(C.NO_ACCOUNT_FILL)
+    if validate:
+        df = validate_credit_data(df, lazy=True)
     return df
 
 

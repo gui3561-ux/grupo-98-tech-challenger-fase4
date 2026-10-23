@@ -1,50 +1,50 @@
 ---
-description: Regras fundamentais de engenharia para todo o projeto
+description: Procedimento de engenharia para qualquer tarefa no repositório
 alwaysApply: true
 ---
 
-# AI ENGINEERING CORE
+# Engenharia
 
-Você é um Engenheiro de Software Sênior responsável pela qualidade técnica do sistema.
+Entregue a menor mudança correta, no padrão do repositório, comprovada por comando.
 
-## Fonte de verdade
-O repositório é a fonte primária de verdade.
-Antes de modificar código:
-1. Inspecione o código existente.
-2. Identifique padrões e convenções existentes.
-3. Consulte configurações e lockfiles.
-4. Consulte documentação oficial quando houver dúvida.
-5. Use Context7 quando aplicável.
+## Precedência
+1. Pedido explícito desta conversa. Pular o OpenSpec, aplicar ou arquivar uma change já proposta segue essa fase. Pedido novo de construir ou corrigir comportamento, sem change pronta, autoriza a proposta e para antes do código.
+2. Change OpenSpec ativa desta tarefa, quando existir: proposal, delta specs, design e tasks.
+3. Comportamento vigente em `openspec/specs/`.
+4. Código, testes, schemas, lockfiles e CI.
+5. `AGENTS.md`.
+6. Regra de domínio em `.cursor/rules/`.
+7. Esta regra.
 
-Nunca assuma stack, versões, APIs, arquitetura ou comportamento de bibliotecas.
+## Antes de editar
+- Leia a implementação vizinha e um teste do mesmo tipo de mudança. Sem vizinho, use o manifesto e o teste mais próximo do módulo.
+- Descubra stack, versão, comandos e arquitetura em lockfiles, manifestos, scripts e CI.
+- Use API, flag, hook, schema ou comando visto no repositório ou na documentação da versão instalada. Com dúvida, consulte a doc oficial. Se Context7 estiver disponível, resolva o id da biblioteca e consulte a doc dessa versão.
+- Pergunte somente quando a escolha mudar contrato público, dados persistidos ou segurança. Nos outros casos, siga o padrão já usado no código.
 
-## Regra anti-alucinação
-NUNCA invente APIs, métodos, hooks, componentes, bibliotecas, versões, configurações, endpoints, schemas, comandos ou comportamentos de frameworks.
-Se não tiver certeza, investigue antes de implementar.
+## Durante
+- Copie estrutura, nomes, erros e testes do arquivo vizinho.
+- Altere só o que a tarefa pede. Comentário novo explica o porquê, quando o código não mostra a restrição.
+- Dependência nova somente se o repositório não resolver o caso e a biblioteca for compatível com a versão atual.
+- Mudança de comportamento, contrato ou schema: siga `.cursor/rules/60-openspec.mdc` antes de alterar código de aplicação.
+- Ajuste local sem mudança de comportamento: edite e verifique o que a mudança pode quebrar.
 
-## Consistência
-Prefira padrões já utilizados no projeto.
-Não introduza nova arquitetura, biblioteca ou padrão apenas por preferência pessoal.
+## Pronto
+Rode o comando real do projeto, na ordem de `AGENTS.md`, scripts ou CI: teste da área afetada e, se a mudança puder quebrar, lint e typecheck.
+Informe o comando e o resultado. Se um comando não rodou, diga que aquele item não foi verificado.
+Pergunta sem edição: responda com o que foi lido. Não rode a suíte para explicar o código.
 
-## Simplicidade
-Prefira a solução mais simples que satisfaça o requisito.
-Evite overengineering, abstrações prematuras, refatorações não relacionadas e dependências desnecessárias.
-
-## Escopo
-Modifique somente o necessário para atender à tarefa.
-Não aproveite a tarefa para realizar melhorias não relacionadas.
-
-## Workflow
-Para mudanças relevantes:
-UNDERSTAND → INSPECT → PLAN → IMPLEMENT → TEST → REVIEW → VERIFY
-
-## Validação
-Nunca declare algo como validado sem executar a validação correspondente.
-Antes de concluir, execute os checks disponíveis e relevantes no projeto.
-
-## Segurança
-Toda alteração deve considerar segurança, exposição de dados, autorização e possíveis regressões.
-Nunca exponha secrets, tokens, credenciais ou dados sensíveis.
+## Segredos
+Segredos, tokens e credenciais ficam fora de código, logs, testes, exemplos e commits.
 
 ## Idioma
-Comunique-se em Português do Brasil (pt-BR).
+Responda em português do Brasil. Termos de código ficam como estão no repositório.
+
+## Regras de domínio
+Se a tarefa tocar o tema e a regra ainda não estiver no contexto, leia o arquivo antes de editar:
+- autenticação, autorização, entrada externa, segredos ou dados sensíveis: `.cursor/rules/10-security.mdc`
+- testes ou correção de bug: `.cursor/rules/20-testing.mdc`
+- backend, integração ou caso de uso: `.cursor/rules/30-backend.mdc`
+- interface, componente ou estado de tela: `.cursor/rules/40-frontend.mdc`
+- schema, migration, query ou transação: `.cursor/rules/50-database.mdc`
+- comportamento, contrato, proposal, change ou archive: `.cursor/rules/60-openspec.mdc`

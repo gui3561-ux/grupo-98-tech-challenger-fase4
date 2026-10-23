@@ -1,5 +1,5 @@
 ---
-description: Padrões de frontend, UI e UX
+description: Use quando for alterar interface, componente, página, estado de tela, formulário ou estilo (UI, UX, React, shadcn).
 globs:
   - "frontend/**"
   - "src/components/**"
@@ -10,34 +10,21 @@ globs:
 alwaysApply: false
 ---
 
-# FRONTEND
+# Frontend
 
-## Componentes
-Priorize responsabilidade clara, reutilização quando apropriada, baixo acoplamento e composição.
-Não crie componentes genéricos excessivamente abstratos.
+Leia o componente vizinho antes de criar outro. Reuse componente, variante e token que a tela ao lado já usa.
 
-## Estado
-Mantenha estado no nível apropriado.
-Evite estado global quando estado local ou de página for suficiente.
-
-## UI
-Respeite o Design System existente.
-Antes de criar componentes:
-1. procure componentes existentes;
-2. procure variantes existentes;
-3. verifique padrões utilizados no projeto.
+## Componente
+Uma responsabilidade por componente. Componha com os blocos existentes.
+Estado fica no componente ou na página, salvo quando o projeto já compartilha esse estado.
 
 ## shadcn/ui
-Quando presente:
-- reutilize componentes existentes;
-- utilize variantes existentes;
-- preserve padrões do projeto;
-- evite recriar componentes equivalentes.
+Se o projeto usa shadcn/ui, monte a tela com os componentes já instalados e as variantes existentes.
+Outra biblioteca de UI só entra com pedido explícito.
 
-Não introduza outra biblioteca de UI sem justificativa.
+## Interação
+Cubra os estados que a tela vizinha já trata: carregando, vazio, erro e sucesso.
+Controle interativo tem nome acessível, foco por teclado e erro associado ao campo, no padrão dos componentes atuais.
 
-## Acessibilidade
-Considere navegação por teclado, semântica HTML, labels, foco, contraste e estados de erro/loading.
-
-## UX
-Considere loading, empty state, error state, success state, feedback de ações e responsividade.
+## Verificação
+Mudança visível de fluxo passa pelo teste de UI do projeto, se existir. Se existir app no ar e não houver teste de UI, percorra o fluxo afetado no navegador.

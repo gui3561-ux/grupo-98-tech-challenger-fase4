@@ -1,5 +1,5 @@
 ---
-description: Padrões para desenvolvimento backend
+description: Use quando for alterar servidor, endpoint, controller, serviço, caso de uso, job ou integração externa (API, backend, handler).
 globs:
   - "backend/**"
   - "server/**"
@@ -7,30 +7,32 @@ globs:
   - "src/controllers/**"
   - "src/services/**"
   - "src/use-cases/**"
+  - "src/usecases/**"
+  - "src/application/**"
+  - "app/Http/**"
+  - "**/handlers/**"
 alwaysApply: false
 ---
 
-# BACKEND
+# Backend
 
-Antes de implementar, identifique:
-1. padrão arquitetural;
-2. tratamento de erros;
-3. validação de inputs;
-4. acesso a dados;
-5. autenticação/autorização.
+Antes de implementar, leia um endpoint vizinho e copie estes pontos: onde a entrada é validada, onde a regra mora, como o erro vira resposta, como os dados são acessados e onde a autorização acontece.
 
-## Controllers
-Controllers devem permanecer focados em receber entrada, validar, chamar a aplicação e retornar resposta.
-Não concentre regras complexas de negócio no controller.
+## Handler
+O handler recebe a entrada, chama a aplicação e devolve a resposta no formato já usado.
+Regra de negócio fica na camada em que o código vizinho já a coloca.
+Uma regra existe em um só lugar.
 
-## Regras de negócio
-Mantenha regras no local definido pela arquitetura existente.
-Não duplique regras entre controllers, services, repositories e jobs.
+## Erros
+Propague erro no tipo, código e payload que os handlers vizinhos usam.
+Catch vazio ou hierarquia nova de erro para um único caso fica de fora.
 
-## Integrações externas
-Considere timeout, retry, backoff, idempotência e circuit breaker quando tecnicamente apropriado.
-Não adicione mecanismos de resiliência sem necessidade.
+## Integração externa
+Timeout, retry, backoff, idempotência e circuit breaker entram quando o cliente do projeto já oferece esse mecanismo, ou quando a chamada pode duplicar efeito ou travar e não há equivalente.
+Reuse o cliente existente.
 
-## Banco
-Evite N+1, queries desnecessárias, ausência de paginação em grandes coleções e transações excessivamente longas.
-Ao alterar schema, utilize o mecanismo de migration existente e considere dados existentes e compatibilidade.
+## Dados
+Paginar coleção sem limite superior.
+Busque o conjunto em uma query quando o acesso a dados do projeto permitir.
+Transação cobre só o conjunto de escritas que precisa ser atômico.
+Schema, migration e SQL seguem `.cursor/rules/50-database.mdc`.

@@ -1,39 +1,36 @@
 ---
-description: Regras de segurança para alterações que envolvam autenticação, autorização, dados, APIs, banco ou infraestrutura
+description: Use quando a tarefa envolver autenticação, autorização, sessão, permissão, controller, webhook, segredo, validação de entrada ou dados sensíveis (auth, IDOR, secrets, input).
 globs:
   - "**/*auth*"
+  - "**/*session*"
   - "**/*permission*"
-  - "**/*security*"
-  - "**/*api*"
-  - "**/*controller*"
+  - "**/*policy*"
+  - "**/*guard*"
   - "**/*middleware*"
-  - "**/*route*"
+  - "**/*controller*"
+  - "**/*webhook*"
 alwaysApply: false
 ---
 
-# SECURITY
+# Segurança
 
-Considere Security by Design.
+Use o mecanismo de validação, autenticação e autorização que o projeto já tem. Acrescente um controle só quando a mudança cria o risco e não existe equivalente no repositório.
 
 ## Entrada
-Nunca confie em dados externos.
-Valide entradas na borda usando o mecanismo já adotado pelo projeto.
+Trate corpo, query, header, arquivo e webhook como não confiáveis.
+Valide na borda com o validador já adotado, antes da regra de negócio.
 
-## Autorização
-Nunca confie apenas no frontend.
-Operações sensíveis devem ser autorizadas no backend.
-Considere identidade, permissões, ownership e tenant.
-Preste atenção especial a IDOR / Broken Access Control.
+## Acesso
+Autorize no servidor. Checagem só na interface não protege a operação.
+Toda leitura ou escrita por identificador confirma identidade, permissão, ownership e tenant, no mesmo critério do endpoint vizinho.
+Consulta usa o mecanismo parametrizado do projeto.
 
-## Vulnerabilidades
-Considere SQL Injection, XSS, CSRF, SSRF, IDOR, path traversal, insecure deserialization e exposição indevida de informações.
+## Saída
+A resposta ao cliente descreve a falha sem stack trace, SQL, caminho interno ou segredo.
+Log de aplicação também omite senha, token, credencial e dado pessoal sensível.
 
-## Secrets
-Nunca coloque no código senhas, tokens, API keys, credenciais ou secrets.
-Nunca faça commit de secrets.
+## Segredos
+Senha, token, API key e credencial ficam no mecanismo de segredo já usado.
+Não os escreva em código, fixture, log ou mensagem de commit.
 
-## Logs
-Nunca registre desnecessariamente senhas, tokens, credenciais ou dados pessoais sensíveis.
-
-## Erros
-Não exponha stack traces ou detalhes internos ao usuário final.
+Exemplo: `findById(id)` seguido de retorno direto expõe o registro. Confirme que o registro pertence a quem está autorizado, como o handler vizinho já faz.

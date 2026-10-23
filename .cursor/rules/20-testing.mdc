@@ -1,37 +1,32 @@
 ---
-description: Estratégia de testes e qualidade
+description: Use quando for escrever teste, corrigir bug, mudar comportamento ou provar regressão (test, spec, TDD, bugfix).
 globs:
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/tests/**"
   - "**/__tests__/**"
+  - "**/test_*.py"
+  - "**/*_test.go"
 alwaysApply: false
 ---
 
-# TESTING
+# Testes
 
-Os testes devem gerar confiança no comportamento do sistema.
+Leia um teste vizinho e use o mesmo runner, layout, nome e estilo de assertiva. Não adicione framework de teste que o projeto não usa.
 
-## TDD
-Utilize TDD preferencialmente para regras de negócio, cálculos, validações, comportamentos críticos, código complexo e correções de bugs.
+## O que cobrir
+Cubra o comportamento que a mudança pode quebrar: caminho principal, falha relevante e a borda que o pedido cita.
+O teste falha se esse comportamento quebrar. Não afirme detalhe interno que o caller não observa.
+Na fase apply, cada cenário novo ou alterado do delta spec da change ativa tem um teste correspondente.
 
-Fluxo:
-RED → GREEN → REFACTOR
+## Bug
+1. Reproduza a falha.
+2. Escreva um teste que falha por causa dela.
+3. Corrija a causa.
+4. Rode esse teste e os testes da área afetada.
 
-## Cobertura
-Cubra principalmente happy path, erros, edge cases, regras críticas e regressões.
-Não busque cobertura artificialmente alta.
+## Regra de negócio
+Para cálculo, validação e regra de negócio já cobertos por teste no projeto, escreva o teste que falha e depois o código que o faz passar.
 
 ## Integração
-Utilize testes de integração quando houver interação relevante entre banco, APIs, filas, cache, autenticação ou serviços externos.
-
-## Bugs
-Ao corrigir um bug:
-1. reproduza o problema;
-2. escreva um teste que demonstre o problema;
-3. implemente a correção;
-4. confirme que o teste passa;
-5. execute os testes relacionados.
-
-## Definition of Done
-Quando aplicável: testes, lint, typecheck e build devem passar.
+Use o tipo de teste que o projeto já usa para banco, fila, cache, autenticação ou serviço externo quando a mudança depende dessa interação.

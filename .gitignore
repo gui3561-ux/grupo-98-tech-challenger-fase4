@@ -12,3 +12,6 @@ data/raw.parquet
 data/raw/german_credit_with_risk.csv
 .coverage
 htmlcov/
+.agents/
+.cursor/
+
