@@ -14,4 +14,8 @@ data/raw/german_credit_with_risk.csv
 htmlcov/
 .agents/
 .cursor/
+mlruns/
+.mlruns/
+mlflow.db
+
 

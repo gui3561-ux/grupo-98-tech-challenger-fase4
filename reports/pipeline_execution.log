@@ -1,0 +1,265 @@
+2026-10-23 13:46:09 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:46:09 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:46:09 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:46:09 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:46:09 [INFO] credit.pipeline - MLflow Run iniciada com ID: aeb76400718f4b5e93dd8c4e15ea1379
+2026-10-23 13:46:09 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:46:09 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0558 segundos
+2026-10-23 13:46:09 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:46:09 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.0340 segundos
+2026-10-23 13:46:09 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:46:10 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.3954 segundos
+2026-10-23 13:46:10 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:46:10 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0040 segundos
+2026-10-23 13:46:10 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:46:10 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.5124 segundos
+2026-10-23 13:46:10 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:46:52 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:46:52 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:46:52 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:46:52 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:46:52 [INFO] credit.pipeline - MLflow Run iniciada com ID: f5a56f3f407a4223879f506b20d0a663
+2026-10-23 13:46:52 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:46:52 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0237 segundos
+2026-10-23 13:46:52 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:46:52 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.0267 segundos
+2026-10-23 13:46:52 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:46:53 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.3810 segundos
+2026-10-23 13:46:53 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:46:53 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0034 segundos
+2026-10-23 13:46:53 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:46:53 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.4863 segundos
+2026-10-23 13:46:53 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:46:53 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.9211s, alertas críticos de drift=2
+2026-10-23 13:46:53 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_report.html
+2026-10-23 13:46:53 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_stats.csv
+2026-10-23 13:46:53 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_summary.md
+2026-10-23 13:46:53 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline.joblib
+2026-10-23 13:46:53 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline_metrics.json
+2026-10-23 13:46:53 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/pipeline_execution.log
+2026-10-23 13:46:53 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:46:53 [INFO] credit.pipeline -    PIPELINE UNIFICADO CONCLUÍDO COM SUCESSO!                    
+2026-10-23 13:46:53 [INFO] credit.pipeline -    Run ID: f5a56f3f407a4223879f506b20d0a663
+2026-10-23 13:46:53 [INFO] credit.pipeline -    Visualize o dashboard executando: uv run mlflow ui          
+2026-10-23 13:46:53 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:47:48 [INFO] credit.pipeline - >>> Iniciando estágio: [sample_stage]
+2026-10-23 13:47:48 [INFO] credit.pipeline - <<< Concluído estágio: [sample_stage] em 0.0253 segundos
+2026-10-23 13:47:49 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-8/test_log_operational_metrics_c0/test_mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:47:49 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.2500s, alertas críticos de drift=2
+2026-10-23 13:47:49 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-8/test_run_pipeline_returns_summ0/pipeline_test.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:47:49 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:47:49 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:47:49 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:47:49 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:47:49 [INFO] credit.pipeline - MLflow Run iniciada com ID: b3a81f069b5d4e9f90531682bfea1476
+2026-10-23 13:47:49 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:47:49 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0222 segundos
+2026-10-23 13:47:49 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:47:49 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.1862 segundos
+2026-10-23 13:47:49 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:47:50 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.4484 segundos
+2026-10-23 13:47:50 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:47:50 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0034 segundos
+2026-10-23 13:47:50 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:47:50 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.4811 segundos
+2026-10-23 13:47:50 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:47:50 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=1.1413s, alertas críticos de drift=2
+2026-10-23 13:47:50 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_report.html
+2026-10-23 13:47:50 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_stats.csv
+2026-10-23 13:47:50 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_summary.md
+2026-10-23 13:47:50 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline.joblib
+2026-10-23 13:47:50 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline_metrics.json
+2026-10-23 13:47:50 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/pipeline_execution.log
+2026-10-23 13:47:50 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:47:50 [INFO] credit.pipeline -    PIPELINE UNIFICADO CONCLUÍDO COM SUCESSO!                    
+2026-10-23 13:47:50 [INFO] credit.pipeline -    Run ID: b3a81f069b5d4e9f90531682bfea1476
+2026-10-23 13:47:50 [INFO] credit.pipeline -    Visualize o dashboard executando: uv run mlflow ui          
+2026-10-23 13:47:50 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:48:41 [INFO] credit.pipeline - >>> Iniciando estágio: [sample_stage]
+2026-10-23 13:48:41 [INFO] credit.pipeline - <<< Concluído estágio: [sample_stage] em 0.0229 segundos
+2026-10-23 13:48:42 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-9/test_log_operational_metrics_c0/test_mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:48:42 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.2500s, alertas críticos de drift=2
+2026-10-23 13:48:42 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-9/test_run_pipeline_returns_summ0/pipeline_test.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:48:42 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:48:42 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:48:42 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:48:42 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:48:42 [INFO] credit.pipeline - MLflow Run iniciada com ID: 4a9fb25adeb8403eb717ce147d64d8e5
+2026-10-23 13:48:42 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:48:42 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0105 segundos
+2026-10-23 13:48:42 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:48:43 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.0128 segundos
+2026-10-23 13:48:43 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:48:43 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.3759 segundos
+2026-10-23 13:48:43 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:48:43 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0028 segundos
+2026-10-23 13:48:43 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:48:43 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.4828 segundos
+2026-10-23 13:48:43 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:48:43 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.8848s, alertas críticos de drift=2
+2026-10-23 13:48:43 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_report.html
+2026-10-23 13:48:43 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_stats.csv
+2026-10-23 13:48:43 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_summary.md
+2026-10-23 13:48:43 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline.joblib
+2026-10-23 13:48:43 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline_metrics.json
+2026-10-23 13:48:43 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/pipeline_execution.log
+2026-10-23 13:48:43 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:48:43 [INFO] credit.pipeline -    PIPELINE UNIFICADO CONCLUÍDO COM SUCESSO!                    
+2026-10-23 13:48:43 [INFO] credit.pipeline -    Run ID: 4a9fb25adeb8403eb717ce147d64d8e5
+2026-10-23 13:48:43 [INFO] credit.pipeline -    Visualize o dashboard executando: uv run mlflow ui          
+2026-10-23 13:48:43 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:06 [INFO] credit.pipeline - >>> Iniciando estágio: [sample_stage]
+2026-10-23 13:50:06 [INFO] credit.pipeline - <<< Concluído estágio: [sample_stage] em 0.0254 segundos
+2026-10-23 13:50:07 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-10/test_log_operational_metrics_c0/test_mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:50:07 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.2500s, alertas críticos de drift=2
+2026-10-23 13:50:07 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-10/test_run_pipeline_returns_summ0/pipeline_test.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:50:07 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:50:07 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:07 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:50:07 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:07 [INFO] credit.pipeline - MLflow Run iniciada com ID: af08d3e0877b44a7a62218e8dfab8fd8
+2026-10-23 13:50:07 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:50:07 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0169 segundos
+2026-10-23 13:50:07 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:50:07 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.0239 segundos
+2026-10-23 13:50:07 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:50:08 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.3673 segundos
+2026-10-23 13:50:08 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:50:08 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0026 segundos
+2026-10-23 13:50:08 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:50:08 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.6013 segundos
+2026-10-23 13:50:08 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:50:08 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=1.0120s, alertas críticos de drift=2
+2026-10-23 13:50:08 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_report.html
+2026-10-23 13:50:08 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_stats.csv
+2026-10-23 13:50:08 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_summary.md
+2026-10-23 13:50:08 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline.joblib
+2026-10-23 13:50:08 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline_metrics.json
+2026-10-23 13:50:08 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/pipeline_execution.log
+2026-10-23 13:50:08 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:08 [INFO] credit.pipeline -    PIPELINE UNIFICADO CONCLUÍDO COM SUCESSO!                    
+2026-10-23 13:50:08 [INFO] credit.pipeline -    Run ID: af08d3e0877b44a7a62218e8dfab8fd8
+2026-10-23 13:50:08 [INFO] credit.pipeline -    Visualize o dashboard executando: uv run mlflow ui          
+2026-10-23 13:50:08 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:19 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:50:19 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:19 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:50:19 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:20 [INFO] credit.pipeline - MLflow Run iniciada com ID: c408c23e004547cea9de5e28d3354b03
+2026-10-23 13:50:20 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:50:20 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0175 segundos
+2026-10-23 13:50:20 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:50:20 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.0234 segundos
+2026-10-23 13:50:20 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:50:20 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.3794 segundos
+2026-10-23 13:50:20 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:50:20 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0037 segundos
+2026-10-23 13:50:20 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:50:20 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.4895 segundos
+2026-10-23 13:50:20 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:50:21 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.9135s, alertas críticos de drift=2
+2026-10-23 13:50:21 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_report.html
+2026-10-23 13:50:21 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_stats.csv
+2026-10-23 13:50:21 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_summary.md
+2026-10-23 13:50:21 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline.joblib
+2026-10-23 13:50:21 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline_metrics.json
+2026-10-23 13:50:21 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/pipeline_execution.log
+2026-10-23 13:50:21 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:21 [INFO] credit.pipeline -    PIPELINE UNIFICADO CONCLUÍDO COM SUCESSO!                    
+2026-10-23 13:50:21 [INFO] credit.pipeline -    Run ID: c408c23e004547cea9de5e28d3354b03
+2026-10-23 13:50:21 [INFO] credit.pipeline -    Visualize o dashboard executando: uv run mlflow ui          
+2026-10-23 13:50:21 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:44 [INFO] credit.pipeline - >>> Iniciando estágio: [sample_stage]
+2026-10-23 13:50:44 [INFO] credit.pipeline - <<< Concluído estágio: [sample_stage] em 0.0389 segundos
+2026-10-23 13:50:46 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-11/test_log_operational_metrics_c0/test_mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:50:46 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.2500s, alertas críticos de drift=2
+2026-10-23 13:50:46 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-11/test_run_pipeline_returns_summ0/pipeline_test.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:50:46 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:50:46 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:46 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:50:46 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:46 [INFO] credit.pipeline - MLflow Run iniciada com ID: 1ace2d568621463ea36440df2ecac748
+2026-10-23 13:50:46 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:50:46 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0113 segundos
+2026-10-23 13:50:46 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:50:46 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.0118 segundos
+2026-10-23 13:50:46 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:50:47 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.3877 segundos
+2026-10-23 13:50:47 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:50:47 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0028 segundos
+2026-10-23 13:50:47 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:50:47 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.4850 segundos
+2026-10-23 13:50:47 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:50:47 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.8986s, alertas críticos de drift=2
+2026-10-23 13:50:47 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_report.html
+2026-10-23 13:50:47 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_stats.csv
+2026-10-23 13:50:47 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_summary.md
+2026-10-23 13:50:47 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline.joblib
+2026-10-23 13:50:47 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline_metrics.json
+2026-10-23 13:50:47 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/pipeline_execution.log
+2026-10-23 13:50:47 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:50:47 [INFO] credit.pipeline -    PIPELINE UNIFICADO CONCLUÍDO COM SUCESSO!                    
+2026-10-23 13:50:47 [INFO] credit.pipeline -    Run ID: 1ace2d568621463ea36440df2ecac748
+2026-10-23 13:50:47 [INFO] credit.pipeline -    Visualize o dashboard executando: uv run mlflow ui          
+2026-10-23 13:50:47 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:55:53 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:55:53 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:55:53 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:55:53 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:55:53 [INFO] credit.pipeline - MLflow Run iniciada com ID: 6a940c89cd9e418a89cdf001e30c33f9
+2026-10-23 13:55:53 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:55:53 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0171 segundos
+2026-10-23 13:55:53 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:55:53 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.0226 segundos
+2026-10-23 13:55:53 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:55:53 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.3795 segundos
+2026-10-23 13:55:53 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:55:53 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0030 segundos
+2026-10-23 13:55:53 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:55:54 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.4578 segundos
+2026-10-23 13:55:54 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:55:54 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.8800s, alertas críticos de drift=2
+2026-10-23 13:55:54 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_report.html
+2026-10-23 13:55:54 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_stats.csv
+2026-10-23 13:55:54 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_summary.md
+2026-10-23 13:55:54 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline.joblib
+2026-10-23 13:55:54 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline_metrics.json
+2026-10-23 13:55:54 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/pipeline_execution.log
+2026-10-23 13:55:54 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:55:54 [INFO] credit.pipeline -    PIPELINE UNIFICADO CONCLUÍDO COM SUCESSO!                    
+2026-10-23 13:55:54 [INFO] credit.pipeline -    Run ID: 6a940c89cd9e418a89cdf001e30c33f9
+2026-10-23 13:55:54 [INFO] credit.pipeline -    Visualize o dashboard executando: uv run mlflow ui          
+2026-10-23 13:55:54 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:56:17 [INFO] credit.pipeline - >>> Iniciando estágio: [sample_stage]
+2026-10-23 13:56:17 [INFO] credit.pipeline - <<< Concluído estágio: [sample_stage] em 0.0251 segundos
+2026-10-23 13:56:18 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-12/test_log_operational_metrics_c0/test_mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:56:18 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.2500s, alertas críticos de drift=2
+2026-10-23 13:56:18 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:////private/var/folders/06/b2198r3s1tnf0yrfzp16dc640000gn/T/pytest-of-guilhermecouceiro/pytest-12/test_run_pipeline_returns_summ0/pipeline_test.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:56:18 [INFO] credit.pipeline - MLflow configurado com Tracking URI: 'sqlite:///mlflow.db' | Experimento: 'credit-scoring-mlops'
+2026-10-23 13:56:18 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:56:18 [INFO] credit.pipeline -    INICIANDO PIPELINE UNIFICADO DE CRÉDITO COM MLFLOW TRACKING   
+2026-10-23 13:56:18 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:56:18 [INFO] credit.pipeline - MLflow Run iniciada com ID: a8c241ab57b84d9daae3f3594c32f584
+2026-10-23 13:56:18 [INFO] credit.pipeline - >>> Iniciando estágio: [data_validation]
+2026-10-23 13:56:18 [INFO] credit.pipeline - <<< Concluído estágio: [data_validation] em 0.0126 segundos
+2026-10-23 13:56:18 [INFO] credit.pipeline - >>> Iniciando estágio: [data_split]
+2026-10-23 13:56:18 [INFO] credit.pipeline - <<< Concluído estágio: [data_split] em 0.1631 segundos
+2026-10-23 13:56:18 [INFO] credit.pipeline - >>> Iniciando estágio: [model_training]
+2026-10-23 13:56:19 [INFO] credit.pipeline - <<< Concluído estágio: [model_training] em 0.3770 segundos
+2026-10-23 13:56:19 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_simulation]
+2026-10-23 13:56:19 [INFO] credit.pipeline - <<< Concluído estágio: [drift_simulation] em 0.0027 segundos
+2026-10-23 13:56:19 [INFO] credit.pipeline - >>> Iniciando estágio: [drift_detection]
+2026-10-23 13:56:19 [INFO] credit.pipeline - <<< Concluído estágio: [drift_detection] em 0.4398 segundos
+2026-10-23 13:56:19 [INFO] credit.pipeline - Registrando métricas de saúde operacional e artefatos no MLflow...
+2026-10-23 13:56:19 [INFO] credit.pipeline - Métricas registradas no MLflow: latência total=0.9952s, alertas críticos de drift=2
+2026-10-23 13:56:19 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_report.html
+2026-10-23 13:56:19 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_stats.csv
+2026-10-23 13:56:19 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/drift_summary.md
+2026-10-23 13:56:19 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline.joblib
+2026-10-23 13:56:19 [INFO] credit.pipeline - Artefato registrado no MLflow: models/credit_baseline_metrics.json
+2026-10-23 13:56:19 [INFO] credit.pipeline - Artefato registrado no MLflow: reports/pipeline_execution.log
+2026-10-23 13:56:19 [INFO] credit.pipeline - =================================================================
+2026-10-23 13:56:19 [INFO] credit.pipeline -    PIPELINE UNIFICADO CONCLUÍDO COM SUCESSO!                    
+2026-10-23 13:56:19 [INFO] credit.pipeline -    Run ID: a8c241ab57b84d9daae3f3594c32f584
+2026-10-23 13:56:19 [INFO] credit.pipeline -    Visualize o dashboard executando: uv run mlflow ui          
+2026-10-23 13:56:19 [INFO] credit.pipeline - =================================================================
