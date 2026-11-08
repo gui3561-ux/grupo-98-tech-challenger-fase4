@@ -39,12 +39,25 @@ def make_reference_production_split(
     O dataset de produção ainda **não** tem drift — isso é feito em `simulate_drift`.
     """
     df = load_base_dataset()
-    reference, production = train_test_split(
-        df,
-        test_size=production_size,
-        random_state=random_state,
-        stratify=df[C.TARGET],
-    )
+    if len(df) > C.N_REAL_ROWS:
+        # Dataset aumentado: split estratificado só nas linhas reais; as sintéticas já foram
+        # geradas por partição (sem vazamento) e são alocadas pela ordem em que foram escritas.
+        real, synth = df.iloc[: C.N_REAL_ROWS], df.iloc[C.N_REAL_ROWS :]
+        ref_real, prod_real = train_test_split(
+            real,
+            test_size=production_size,
+            random_state=random_state,
+            stratify=real[C.TARGET],
+        )
+        reference = pd.concat([ref_real, synth.iloc[: C.N_SYNTH_REFERENCE]])
+        production = pd.concat([prod_real, synth.iloc[C.N_SYNTH_REFERENCE :]])
+    else:
+        reference, production = train_test_split(
+            df,
+            test_size=production_size,
+            random_state=random_state,
+            stratify=df[C.TARGET],
+        )
     reference = reference.reset_index(drop=True)
     production = production.reset_index(drop=True)
 

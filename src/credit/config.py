@@ -45,3 +45,11 @@ PREDICTION_PROBA = "prediction_proba"  # probabilidade da classe 'bad'
 NO_ACCOUNT_FILL = "no_account"
 
 RANDOM_STATE = 42
+
+# --- Aumento de dados (>= 5.000 amostras) -----------------------------------
+# O CSV bruto tem as N_REAL_ROWS primeiras linhas reais (German Credit) seguidas das
+# linhas sintéticas: as N_SYNTH_REFERENCE primeiras vão para a Referência e as
+# N_SYNTH_PRODUCTION seguintes para a Produção (ver `data/augment_dataset.py`).
+N_REAL_ROWS = 1000
+N_SYNTH_REFERENCE = 2800
+N_SYNTH_PRODUCTION = 1200

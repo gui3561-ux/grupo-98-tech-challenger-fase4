@@ -63,10 +63,14 @@ def load_target() -> pd.Series:
 
 
 def main() -> None:
+    if OUTPUT_CSV.exists():
+        # O CSV versionado já contém as linhas reais + sintéticas (>= 5.000); não sobrescrever.
+        print(f"[make_dataset] {OUTPUT_CSV} já existe; nada a fazer (apague-o para regenerar).")
+        return
     if not SOURCE_CSV.exists():
         raise FileNotFoundError(f"CSV base não encontrado: {SOURCE_CSV}")
 
-    features = pd.read_csv(SOURCE_CSV, index_col=0)
+    features = pd.read_csv(SOURCE_CSV, index_col=0, nrows=1000)
     target = load_target()
 
     if len(features) != len(target):
@@ -77,7 +81,11 @@ def main() -> None:
 
     features = features.reset_index(drop=True)
     features["Risk"] = target.values
-    features.to_csv(OUTPUT_CSV, index=False)
+    features.to_csv(OUTPUT_CSV, index=False, na_rep="NA")
+
+    from src.credit.data.augment_dataset import augment_dataset
+
+    augment_dataset()
 
     print(f"[make_dataset] Gerado {OUTPUT_CSV} com {len(features)} linhas.")
     print(features["Risk"].value_counts().to_string())

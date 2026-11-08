@@ -54,7 +54,7 @@ cd grupo-98-tech-challenger-fase4
 # 2. Sincronizar o ambiente virtual (instala Pandera, Scikit-Learn, Evidently, MLflow, etc.)
 uv sync
 
-# 3. Gerar o dataset de crédito base com target 'Risk' integrado
+# 3. (Opcional) O CSV com 5.000 linhas e target 'Risk' já está versionado; este comando não o sobrescreve
 uv run python -m src.credit.data.make_dataset
 ```
 
@@ -71,6 +71,17 @@ O repositório oferece scripts dedicados para cada entrega avaliada pela banca:
 | **Testes** | `uv run pytest tests/` | Executa a suíte completa de testes automatizados unitários e de integração. |
 
 ---
+
+### 2.3. Dataset Aumentado (5.000 linhas) e Nota sobre Dados Sintéticos
+
+O edital exige um dataset com no mínimo 5.000 amostras, e o *German Credit* original tem 1.000. Por isso data/raw/german_credit_with_risk.csv contém **5.000 linhas com as mesmas 10 colunas** (Age, Sex, Job, Housing, Saving accounts, Checking account, Credit amount, Duration, Purpose, Risk):
+
+- **Linhas 1–1.000:** dados **reais** do German Credit (UCI id=144), na ordem original.
+- **Linhas 1.001–5.000:** **4.000 linhas sintéticas** (dados fictícios, sem relação com clientes reais), geradas por uv run python -m src.credit.data.augment_dataset.
+
+**Método:** cópula gaussiana ajustada **por classe** de Risk, preservando as distribuições marginais, as correlações e a proporção de 30% de ad. Os sintéticos de **Referência** (2.800) usam apenas as linhas reais da Referência, e os de **Produção** (1.200) apenas as da Produção, sem *data leakage* entre os conjuntos. Todas as linhas passam pelo contrato Pandera. O drift é injetado depois, em simulate_drift. A semente é fixa (RANDOM_STATE=42).
+
+> **Limitação:** o holdout da Referência tem ~80% de linhas sintéticas e, por isso, o ROC-AUC de .8528$ é otimista. Medido em 300 linhas **reais** nunca vistas no treino, o AUC é .7476$ (treino só com reais), .6903$ (só sintéticos) e .7035$ (reais + sintéticos). O modelo mantém sinal real, mas os números absolutos devem ser lidos com essa ressalva.
 
 ## 3. Detalhamento das Etapas de Engenharia
 
@@ -98,7 +109,7 @@ Para diagnosticar a degradação silenciosa provocada por transformações socio
 #### Diagnóstico Estatístico com Evidently AI
 Executado por `src/credit/run_etapa2.py`:
 - **Population Stability Index (PSI):** Quantifica o desvio entre as distribuições empíricas de referência e produção. Valores de $\text{PSI} \ge 0.25$ indicam instabilidade severa.
-  - `Age`: $\text{PSI} \approx 1.10$ (**Drift Crítico**)
+  - `Age`: $\text{PSI} \approx 1.08$ (**Drift Crítico**)
   - `Credit amount`: $\text{PSI} \approx 0.45$ (**Drift Crítico**)
 - **Teste Kolmogorov-Smirnov (KS):** Avalia a hipótese nula de igualdade das distribuições contínuas ($p\text{-valor} < 0.05$ evidencia mudança significativa).
 - **Artefatos Gerados:**
@@ -177,7 +188,7 @@ flowchart TD
     D3 --> DD
     
     DD --> CD["CONCEPT DRIFT (Quebra da relação entre Features e Risco)"]
-    CD --> DEG["DEGRADAÇÃO SILENCIOSA (ROC-AUC despenca de 0.7631 para 0.5623)"]
+    CD --> DEG["DEGRADAÇÃO SILENCIOSA (ROC-AUC despenca de 0.8528 para 0.5757)"]
 ```
 
 ### 5.1. Mecanismo Macroeconômico e Comportamental
@@ -192,14 +203,14 @@ flowchart TD
 ### 5.2. O Fenômeno Estatístico: De Data Drift a Concept Drift
 
 - **Data Drift (Mudança em $P(X)$):**
-  A distribuição conjunta dos atributos de entrada sofreu severa perturbação. O teste PSI acusou instabilidade crítica em `Age` ($\text{PSI} \approx 1.10$) e `Credit amount` ($\text{PSI} \approx 0.45$), enquanto o teste de Kolmogorov-Smirnov rejeitou a hipótese de estabilidade ($p\text{-valor} < 10^{-4}$).
+  A distribuição conjunta dos atributos de entrada sofreu severa perturbação. O teste PSI acusou instabilidade crítica em `Age` ($\text{PSI} \approx 1.08$) e `Credit amount` ($\text{PSI} \approx 0.45$), enquanto o teste de Kolmogorov-Smirnov rejeitou a hipótese de estabilidade ($p\text{-valor} < 10^{-4}$).
 - **Concept Drift (Mudança em $P(Y \mid X)$):**
   Como as variáveis preditoras mudaram de escala e contexto socioeconômico, a correlação entre as features e o verdadeiro comportamento de adimplência mudou. Um empréstimo de valor elevado já não indicava necessariamente uma compra suntuária arriscada, mas sim a reposição inflacionária ordinária.
 - **Impacto no Desempenho do Modelo:**
   O classificador baseline (*Random Forest*), cujas regras de partição e limites de decisão foram calibrados sobre o espaço de treino original, perdeu completamente a calibração de probabilidades:
-  - **ROC-AUC em Holdout (Referência):** $0.7631$ (modelo com bom poder discriminativo).
-  - **ROC-AUC em Produção:** $0.5623$ (modelo degradado para próximo de um classificador aleatório, $\Delta = -0.2008$).
-  - **Acurácia Global:** Sofreu queda de $72.57\%$ para $64.67\%$.
+  - **ROC-AUC em Holdout (Referência):** $0.8528$ (holdout com ~80% de linhas sintéticas; veja a nota de dados sintéticos na seção 2.3 — em linhas 100% reais o AUC é ≈ $0.70$).
+  - **ROC-AUC em Produção:** $0.5757$ (modelo degradado para próximo de um classificador aleatório, $\Delta = -0.2771$).
+  - **Acurácia Global:** Sofreu queda de $78.51\%$ para $63.27\%$.
 
 ### 5.3. Ações Prescritivas de Sustentação MLOps
 
@@ -216,7 +227,7 @@ Diante da detecção tempestiva provida pela camada de observabilidade, a esteir
 grupo-98-tech-challenger-fase4/
 ├── data/
 │   ├── raw/                       <- Dados brutos (German Credit original e com target Risk)
-│   ├── reference/                 <- Dataset de treino/baseline (700 registros limpos)
+│   ├── reference/                 <- Dataset de treino/baseline (3.500 registros: 700 reais + 2.800 sintéticos)
 │   └── production/                <- Datasets de produção (com drift injetado)
 ├── models/
 │   ├── credit_baseline.joblib     <- Modelo Random Forest serializado
